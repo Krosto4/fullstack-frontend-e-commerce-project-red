@@ -17,7 +17,7 @@ export default function Register() {
     email: "",
     username: "",
     password: "",
-    confirmPassword: "", // ИСПРАВЛЕНО: было currentPassword
+    confirmPassword: "",
   });
 
   const [error, setError] = useState("");
@@ -29,12 +29,12 @@ export default function Register() {
     setError("");
   };
 
-  const validateForm = () => { // ИСПРАВЛЕНО: убрал event параметр
+  const validateForm = () => {
     if (formData.password.length < 6) {
       setError("Your password must have more than 6 symbols!");
-      return false; // ИСПРАВЛЕНО: добавил return false
+      return false;
     }
-    if (formData.password !== formData.confirmPassword) { // ИСПРАВЛЕНО: было currentPassword
+    if (formData.password !== formData.confirmPassword) {
       setError("Password do not match!");
       return false;
     }
@@ -68,7 +68,7 @@ export default function Register() {
           email: "",
           username: "",
           password: "",
-          confirmPassword: "", // ИСПРАВЛЕНО: было currentPassword
+          confirmPassword: "",
         });
         navigate("/login");
       })
@@ -77,7 +77,7 @@ export default function Register() {
         if (error.response) {
           alert(`Registration error: ${error.response.data}`);
         } else if (error.request) {
-          alert(`Request error: No response from the server`); // ИСПРАВЛЕНО: опечатка respone -> response
+          alert(`Request error: No response from the server`); 
         } else {
           alert(`Unknown error: ${error.message}`);
         }
@@ -169,6 +169,7 @@ export default function Register() {
               onChange={handleChange}
               required
               type="password"
+              minLength={6}
               placeholder="Enter your password"
             />
             <Form.Control.Feedback type="invalid">
@@ -187,6 +188,7 @@ export default function Register() {
               onChange={handleChange}
               required
               type="password"
+              minLength={6}
               placeholder="Confirm your password"
             />
             <Form.Control.Feedback type="invalid">
