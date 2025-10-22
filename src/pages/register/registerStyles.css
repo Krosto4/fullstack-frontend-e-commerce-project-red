@@ -1,0 +1,16 @@
+.formDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.formGroup{
+    width: 500px;
+    text-align: start;
+}
+
+.registerBtn{
+    height: 50px;
+}

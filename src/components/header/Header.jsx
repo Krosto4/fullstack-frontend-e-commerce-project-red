@@ -1,5 +1,7 @@
+import './headerStyles.css'
+
 import { useContext, useEffect } from "react";
-import AuthContext from "./AuthContext";
+import AuthContext from "../AuthContext";
 import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
@@ -111,6 +113,7 @@ export default function Header() {
         </Link>
       </div>
       {renderProfileMenu()}
+      <hr />
     </>
   );
 }

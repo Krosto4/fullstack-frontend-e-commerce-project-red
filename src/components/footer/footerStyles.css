@@ -1,0 +1,51 @@
+.footerDiv {
+  background: #db4444;
+  color: white;
+  padding: 50px;
+}
+
+.exclusiveText, .supportText, .accountText, .subscribeText, .qucklinkText{
+  margin-bottom: 20px;
+}
+
+.footerInputDiv {
+  width: 200px;
+  height: 50px;
+  border: 1.5px white solid;
+  border-radius: 5px;
+  align-items: center;
+  justify-content: center;
+}
+
+.footerInput {
+  width: 125px;
+  height: 45px;
+  border: none;
+  background: #db4444;
+  color: white;
+}
+
+.footerInput:focus{
+  outline: none;
+}
+
+.footerInput::placeholder {
+  color: #e78d8d;
+  text-align: start;
+  padding: 10px;
+}
+
+.imgs{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.storesDiv{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+}

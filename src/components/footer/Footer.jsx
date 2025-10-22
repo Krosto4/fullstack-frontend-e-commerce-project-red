@@ -1,6 +1,8 @@
-import qrcode from "../assets/qrcode.jpg";
-import googlePlay from "../assets/googlePlay.png";
-import appStore from "../assets/appStore.png";
+import './footerStyles.css'
+
+import qrcode from "../../assets/qrcode.jpg";
+import googlePlay from "../../assets/googlePlay.png";
+import appStore from "../../assets/appStore.png";
 
 export default function Footer() {
   return (
