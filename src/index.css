@@ -14,3 +14,7 @@ a{
 .fw-400{
   font-weight: 400;
 }
+
+.cursor-pointer{
+  cursor: pointer;
+}

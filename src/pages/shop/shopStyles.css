@@ -1,0 +1,14 @@
+.searchInp{
+    border: 1px gray solid;
+    border-radius: 5px;
+    max-width: 150px;
+    height: 35px;
+}
+
+.searchInp::placeholder{
+    font-size: 15px;
+}
+
+.searchInp:focus{
+    outline: none;
+}
