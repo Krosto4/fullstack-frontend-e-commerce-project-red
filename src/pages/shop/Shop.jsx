@@ -208,7 +208,7 @@ export default function Shop() {
             <div className="row row-cols-2 row-cols-md-4">
               {products.length > 0 ? products.map((product, index) => {
                 return(
-                <Card style={{ width: "18rem" }}>
+                <Card key={index} style={{ width: "18rem" }}>
                   <Card.Img
                     onClick={() => handleProductClick(product)}
                     className="cursor-pointer"
