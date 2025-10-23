@@ -221,12 +221,13 @@ export default function Shop() {
                     </Card.Title>
                     <Card.Text>
                       <span className="text-success">{product.price}$</span>
-                      <div>
+                      <br />
+                      <span>
                         <ShowRate rate={product.rate} />
                         <span className="text-secondary">
                           ({product.reviewCount || Math.round(Math.random() * 100)})
                         </span>
-                      </div>
+                      </span>
                     </Card.Text>
                     <Button onClick={() => addToCart(product)} variant="dark">
                       Add to cart
