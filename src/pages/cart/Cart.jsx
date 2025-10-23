@@ -126,7 +126,7 @@ export default function Cart() {
                         min="1"
                         value={product.quantity}
                         onChange={(e) =>
-                          handleQuantityChange(product.id, +e.target.value)
+                          handleQuantityChange(product.productId, +e.target.value)
                         }
                         className="w-80px"
                       />
