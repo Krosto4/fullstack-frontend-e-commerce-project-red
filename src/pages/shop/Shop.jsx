@@ -42,7 +42,7 @@ export default function Shop() {
           {},
           {
             headers: {
-              Authorization: `Bearer: ${token}`,
+              Authorization: `Bearer ${token}`,
             },
           }
         )
@@ -205,7 +205,7 @@ export default function Shop() {
               </select>
             </div>
 
-            <div className="row row-cols-2 row-cols-md-4">
+            <div className="row row-cols-2 row-cols-md-4 gap-4">
               {products.length > 0 ? products.map((product, index) => {
                 return(
                 <Card key={index} style={{ width: "18rem" }}>

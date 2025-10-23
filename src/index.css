@@ -18,3 +18,11 @@ a{
 .cursor-pointer{
   cursor: pointer;
 }
+
+.redBlock{
+    width: 30px;
+    height: 60px;
+    background-color: #DB4444;
+    border: none;
+    border-radius: 5px;
+}
