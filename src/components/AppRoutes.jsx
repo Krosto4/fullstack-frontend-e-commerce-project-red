@@ -12,6 +12,7 @@ import ErrorPage from "../pages/ErrorPage";
 import CreateProduct from "../pages/createProduct/CreateProduct";
 import Home from "../pages/home/Home";
 import Contact from "../pages/contact/Contact";
+import About from "../pages/about/About";
 
 export default function AppRoutes(){
     return(
@@ -29,6 +30,7 @@ export default function AppRoutes(){
                     <Route path="userProducts" element={<UserProducts/>}/>
                     <Route path="addNewProduct" element={<CreateProduct/>}/>
                     <Route path="contact" element={<Contact/>}/>
+                    <Route path="about" element={<About/>}/>
                     <Route path="*" element={<ErrorPage/>}/>
                 </Route>
             </Routes>
