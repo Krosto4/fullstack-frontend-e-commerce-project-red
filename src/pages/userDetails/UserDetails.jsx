@@ -8,7 +8,7 @@ export default function UserDetails(){
     return(
         <>
             <section className='container d-flex align-items-start justify-content-center flex-column'>
-                <Link className='btn btn-danger' to={'/'}>My products for sale</Link>
+                <Link className='btn btn-danger' to={'/userProducts'}>My products for sale</Link>
                 <div className='userDataDiv w-100 p-4 my-4'>
                     <h1 className='text-danger'>User Details</h1>
                     <h2>Name: <span className='fw-400'>{user.name}</span></h2>
