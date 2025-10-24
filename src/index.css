@@ -69,6 +69,11 @@ a{
   font-family: 'Times New Roman', Times, serif;
 }
 
+.round50{
+  border: inherit;
+  border-radius: 50%;
+}
+
 .bg-lightGray{
   background: #f3f5f7;
 }

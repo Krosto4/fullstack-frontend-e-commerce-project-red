@@ -11,6 +11,7 @@ import UserProducts from "../pages/userProducts/UserProducts";
 import ErrorPage from "../pages/ErrorPage";
 import CreateProduct from "../pages/createProduct/CreateProduct";
 import Home from "../pages/home/Home";
+import Contact from "../pages/contact/Contact";
 
 export default function AppRoutes(){
     return(
@@ -27,6 +28,7 @@ export default function AppRoutes(){
                     <Route path="checkout" element={<Checkout/>}/>
                     <Route path="userProducts" element={<UserProducts/>}/>
                     <Route path="addNewProduct" element={<CreateProduct/>}/>
+                    <Route path="contact" element={<Contact/>}/>
                     <Route path="*" element={<ErrorPage/>}/>
                 </Route>
             </Routes>
