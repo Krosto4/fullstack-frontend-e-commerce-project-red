@@ -4,13 +4,28 @@ import { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
 export default function Cart() {
   const [cartProducts, setCartProducts] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
+  let navigate = useNavigate()
+
+  useEffect(() => {
+    authorithatedUserCheck();
+  });
+
+  const authorithatedUserCheck = () => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      navigate("/");
+    } else {
+      return;
+    }
+  };
 
   useEffect(() => {
     getCartProducts();
@@ -127,7 +142,10 @@ export default function Cart() {
                         min="1"
                         value={product.quantity}
                         onChange={(e) =>
-                          handleQuantityChange(product.productId, +e.target.value)
+                          handleQuantityChange(
+                            product.productId,
+                            +e.target.value
+                          )
                         }
                         className="w-80px"
                       />
@@ -148,8 +166,15 @@ export default function Cart() {
             </Table>
             <div className="d-flex justify-content-end mt-4">
               <div className="border p-3 rounded shadow-sm">
-                <h4>Total: <span className="text-success">${totalPrice.toFixed(2)}</span></h4>
-                <Link to={'/checkout'} state={{totalPrice: totalPrice}} className="w-100 mt-2 btn btn-danger">
+                <h4>
+                  Total:{" "}
+                  <span className="text-success">${totalPrice.toFixed(2)}</span>
+                </h4>
+                <Link
+                  to={"/checkout"}
+                  state={{ totalPrice: totalPrice }}
+                  className="w-100 mt-2 btn btn-danger"
+                >
                   Proceed to Checkout
                 </Link>
               </div>

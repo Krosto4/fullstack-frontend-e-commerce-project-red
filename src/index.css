@@ -77,3 +77,15 @@ a{
 .bg-lightGray{
   background: #f3f5f7;
 }
+
+.bsAlert {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  width: 90%;
+  max-width: 500px;
+  transition: all 0.3s ease-in-out;
+}
+

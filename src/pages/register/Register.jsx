@@ -1,7 +1,7 @@
 import axios from "axios";
 import "./registerStyles.css";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Link, useNavigate } from "react-router-dom";
@@ -22,6 +22,20 @@ export default function Register() {
 
   const [error, setError] = useState("");
   let navigate = useNavigate();
+
+  useEffect(() => {
+    authorithatedUserCheck();
+  });
+
+  const authorithatedUserCheck = () => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      navigate("/");
+    } else {
+      return;
+    }
+  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -77,7 +91,7 @@ export default function Register() {
         if (error.response) {
           alert(`Registration error: ${error.response.data}`);
         } else if (error.request) {
-          alert(`Request error: No response from the server`); 
+          alert(`Request error: No response from the server`);
         } else {
           alert(`Unknown error: ${error.message}`);
         }
@@ -176,7 +190,7 @@ export default function Register() {
               {error || "Please provide a password."}
             </Form.Control.Feedback>
           </Form.Group>
-          
+
           <Form.Group
             className="mb-3 formGroup"
             controlId="validationCustomConfirmPassword"

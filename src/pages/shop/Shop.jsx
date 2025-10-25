@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import { Alert } from "react-bootstrap";
 
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
@@ -12,6 +13,8 @@ export default function Shop() {
   const [products, setProducts] = useState([]);
   const [allProducts, setAllProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [alertShow, setAlertShow] = useState(false);
+
   let navigate = useNavigate();
 
   useEffect(() => {
@@ -54,6 +57,7 @@ export default function Shop() {
           console.error("Error adding product to cart:", error.message);
         });
     } else {
+      setAlertShow(true)
       console.error("Error: Authorization token not found.");
     }
   };
@@ -206,40 +210,65 @@ export default function Shop() {
             </div>
 
             <div className="row row-cols-2 row-cols-md-4 gap-4">
-              {products.length > 0 ? products.map((product, index) => {
-                return(
-                <Card key={index} style={{ width: "18rem" }}>
-                  <Card.Img
-                    onClick={() => handleProductClick(product)}
-                    className="cursor-pointer"
-                    variant="top"
-                    src={product.imageUrl}
-                  />
-                  <Card.Body>
-                    <Card.Title>
-                      {product.brand} {product.model}
-                    </Card.Title>
-                    <Card.Text>
-                      <span className="text-success">{product.price}$</span>
-                      <br />
-                      <span>
-                        <ShowRate rate={product.rate} />
-                        <span className="text-secondary">
-                          ({product.reviewCount || Math.round(Math.random() * 100)})
-                        </span>
-                      </span>
-                    </Card.Text>
-                    <Button onClick={() => addToCart(product)} variant="dark">
-                      Add to cart
-                    </Button>
-                  </Card.Body>
-                </Card>
-                )
-              }) : <span className="text-muted">There is no products</span>}
+              {products.length > 0 ? (
+                products.map((product, index) => {
+                  return (
+                    <Card key={index} style={{ width: "18rem" }}>
+                      <Card.Img
+                        onClick={() => handleProductClick(product)}
+                        className="cursor-pointer"
+                        variant="top"
+                        src={product.imageUrl}
+                      />
+                      <Card.Body>
+                        <Card.Title>
+                          {product.brand} {product.model}
+                        </Card.Title>
+                        <Card.Text>
+                          <span className="text-success">{product.price}$</span>
+                          <br />
+                          <span>
+                            <ShowRate rate={product.rate} />
+                            <span className="text-secondary">
+                              (
+                              {product.reviewCount ||
+                                Math.round(Math.random() * 100)}
+                              )
+                            </span>
+                          </span>
+                        </Card.Text>
+                        <Button
+                          onClick={() => addToCart(product)}
+                          variant="dark"
+                        >
+                          Add to cart
+                        </Button>
+                      </Card.Body>
+                    </Card>
+                  );
+                })
+              ) : (
+                <span className="text-muted">There is no products</span>
+              )}
             </div>
           </div>
         </div>
       </section>
+
+      {/* alerts */}
+
+      <Alert className="bsAlert" show={alertShow} variant="danger">
+        <Alert.Heading>Error</Alert.Heading>
+        <p>
+          You need to be in account to add a product in cart.
+        </p>
+        <hr />
+        <div className="d-flex justify-content-end">
+          <Button onClick={() => setAlertShow(false)} variant="outline-danger">
+            Close
+          </Button>
+        </div>
+      </Alert>
     </>
   );
 }

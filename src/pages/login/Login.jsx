@@ -1,11 +1,8 @@
 import "./loginStyles.css";
 
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
-import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
-import Row from "react-bootstrap/Row";
 import AuthContext from "../../components/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -22,6 +19,20 @@ export default function Login() {
   });
   const [error, setError] = useState("");
   let navigate = useNavigate();
+
+  useEffect(()=>{
+    authorithatedUserCheck()
+  },)
+
+  const authorithatedUserCheck = ()=>{
+    const token = localStorage.getItem('token')
+
+    if (token) {
+      navigate('/')
+    } else{
+      return
+    }
+  }
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -54,8 +65,8 @@ export default function Login() {
           throw new Error("No token recieved");
         }
         console.log(response.data);
-        alert("Log in succesful!");
         localStorage.setItem("token", response.data);
+        alert('Logined successfully!')
         getUserAccount();
         setFormData({
           username: "",

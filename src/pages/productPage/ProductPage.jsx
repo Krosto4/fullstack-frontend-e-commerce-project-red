@@ -3,12 +3,15 @@ import { useEffect, useState } from "react";
 import "./ProductPageStyles.css";
 import axios from "axios";
 import Card from "react-bootstrap/Card";
+import { Alert, Button } from "react-bootstrap";
 
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
 export default function ProductPage() {
   const location = useLocation();
   let navigate = useNavigate();
+  const [alertShow, setAlertShow] = useState(false);
+
   const { product } = location.state || {};
   const [relatedProducts, setRelatedProducts] = useState([]);
 
@@ -23,7 +26,10 @@ export default function ProductPage() {
       .get(`${baseUrl}/products/all`)
       .then((response) => {
         const related = response.data
-          .filter((prod) => prod.category === product.category && prod.id !== product.id)
+          .filter(
+            (prod) =>
+              prod.category === product.category && prod.id !== product.id
+          )
           .slice(0, 4);
         setRelatedProducts(related);
       })
@@ -70,6 +76,7 @@ export default function ProductPage() {
           console.error("Error adding product to cart:", error.message);
         });
     } else {
+      setAlertShow(true)
       console.error("Error: Authorization token not found.");
     }
   };
@@ -175,6 +182,18 @@ export default function ProductPage() {
           </div>
         </div>
       </section>
+      {/* alerts */}
+
+      <Alert className="bsAlert" show={alertShow} variant="danger">
+        <Alert.Heading>Error</Alert.Heading>
+        <p>You need to be in account to add a product in cart.</p>
+        <hr />
+        <div className="d-flex justify-content-end">
+          <Button onClick={() => setAlertShow(false)} variant="outline-danger">
+            Close
+          </Button>
+        </div>
+      </Alert>
     </>
   );
 }

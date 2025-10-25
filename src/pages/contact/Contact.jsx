@@ -36,7 +36,7 @@ export default function Contact() {
             </div>
           </div>
           <div className="col-7 shadow rounded container d-flex flex-column align-items-center justify-content-center gap-4">
-            <div className="d-flex align-items-center justify-content-center">
+            <div className="d-flex align-items-center justify-content-center gap-2">
               <input
                 className="inputStyles p-2"
                 type="text"

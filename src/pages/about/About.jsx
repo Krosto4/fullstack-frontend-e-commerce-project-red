@@ -36,7 +36,7 @@ export default function About() {
           <div>
             <img src={Emin} />
             <div>
-              <h3>Emin Sadiqli</h3>
+              <h3 className="my-3">Emin Sadiqli</h3>
               <p>Founder & Chairman</p>
               <div className="d-flex flex-row align-items-center justify-content-start gap-2">
                 <i className="bi bi-twitter"></i>
@@ -49,7 +49,7 @@ export default function About() {
           <div>
             <img src={Iman} />
             <div>
-              <h3>Iman Imanov</h3>
+              <h3 className="my-3">Iman Imanov</h3>
               <p>Managing Director</p>
               <div className="d-flex flex-row align-items-center justify-content-start gap-2">
                 <i className="bi bi-twitter"></i>
@@ -62,7 +62,7 @@ export default function About() {
           <div>
             <img src={Nicat} />
             <div>
-              <h3>Nicat Piriyev</h3>
+              <h3 className="my-3">Nicat Piriyev</h3>
               <p>Product Designer</p>
               <div className="d-flex flex-row align-items-center justify-content-start gap-2">
                 <i className="bi bi-twitter"></i>

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
@@ -17,7 +18,22 @@ export default function CreateProduct() {
 
   const [formCategories, setFormCategories] = useState([]);
 
+  let navigate = useNavigate();
   const [validated, setValidated] = useState(false);
+
+  useEffect(() => {
+    authorithatedUserCheck();
+  });
+
+  const authorithatedUserCheck = () => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      navigate("/");
+    } else {
+      return;
+    }
+  };
 
   useEffect(() => {
     getProductsCategory();
@@ -48,7 +64,7 @@ export default function CreateProduct() {
       category: "",
       description: "",
       price: "",
-      rating: "",
+      rate: "",
       imageUrl: "",
     });
     setValidated(false);
@@ -74,15 +90,8 @@ export default function CreateProduct() {
       .then((response) => {
         console.log(response.data);
         alert("Product created successfully!");
-        setFormData({
-          brand: "",
-          model: "",
-          category: "",
-          description: "",
-          price: "",
-          rating: "",
-          imageUrl: "",
-        });
+        handleReset();
+        navigate("/userProducts");
       })
       .catch((error) => {
         console.error(`Something went wronng: ${error.message}}`);
@@ -95,7 +104,9 @@ export default function CreateProduct() {
       <section className="container">
         <h1 className="text-center">Create new product</h1>
         <div className="d-flex flex-column align-items-center justify-content-center">
-          <Form noValidate validated={validated}
+          <Form
+            noValidate
+            validated={validated}
             onSubmit={handleSubmit}
             className="d-flex flex-column gap-3 w-50"
           >
@@ -192,9 +203,9 @@ export default function CreateProduct() {
               <Form.Label>Rating</Form.Label>
               <Form.Control
                 type="number"
-                name="rating"
+                name="rate"
                 placeholder="1–5"
-                value={formData.rating}
+                value={formData.rate}
                 onChange={handleChange}
                 min="1"
                 max="5"

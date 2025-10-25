@@ -1,12 +1,28 @@
 import { Button, Form, Modal, Table, Row, Col } from "react-bootstrap";
 import "./userProductsStyles.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
 export default function UserProducts() {
+  let navigate = useNavigate()
+
+  useEffect(() => {
+    authorithatedUserCheck();
+  });
+
+  const authorithatedUserCheck = () => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      navigate("/");
+    } else {
+      return;
+    }
+  };
+
   const [formData, setFormData] = useState({
     brand: "",
     model: "",
@@ -311,7 +327,9 @@ export default function UserProducts() {
 
               <Col md={3}>
                 <Form.Group className="mb-3" controlId="price">
-                  <Form.Label>Price <span className="text-success">$</span></Form.Label>
+                  <Form.Label>
+                    Price <span className="text-success">$</span>
+                  </Form.Label>
                   <Form.Control
                     type="number"
                     name="price"

@@ -3,7 +3,7 @@ import Visa from "../../assets/visa.png";
 import MasterCard from "../../assets/mastercard.png";
 import Maestro from "../../assets/maestro.png";
 import Discover from "../../assets/discover.jpeg";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import AuthContext from "../../components/AuthContext";
 import { Button, Col, Row } from "react-bootstrap";
@@ -19,16 +19,30 @@ export default function Checkout() {
   const location = useLocation();
   const subtotal = location.state.totalPrice;
 
+  useEffect(() => {
+    authorithatedUserCheck();
+  });
+
+  const authorithatedUserCheck = () => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      navigate("/");
+    } else {
+      return;
+    }
+  };
+
   const handleSubmit = (event) => {
     const form = event.currentTarget;
     event.preventDefault();
     event.stopPropagation();
-    
+
     if (form.checkValidity() === false) {
       setValidated(true);
       return;
     }
-    
+
     setValidated(true);
     purchaseSubmit();
   };
@@ -61,7 +75,7 @@ export default function Checkout() {
             <Col lg={6}>
               <div className="border rounded p-4">
                 <h4 className="mb-3">Personal Information</h4>
-                
+
                 <Form.Group controlId="validationName" className="mb-3">
                   <Form.Label>Name</Form.Label>
                   <Form.Control
@@ -144,11 +158,7 @@ export default function Checkout() {
 
                 <Form.Group controlId="validationZip" className="mb-3">
                   <Form.Label>Zip Code</Form.Label>
-                  <Form.Control
-                    required
-                    type="text"
-                    placeholder="e.g. 12345"
-                  />
+                  <Form.Control required type="text" placeholder="e.g. 12345" />
                   <Form.Control.Feedback type="invalid">
                     Please provide a valid zip code.
                   </Form.Control.Feedback>
@@ -238,7 +248,7 @@ export default function Checkout() {
 
                 <div className="mt-4 border-top pt-3">
                   <h4 className="mb-3">Order Summary</h4>
-                  
+
                   <div className="d-flex justify-content-between mb-2">
                     <span className="fs-5">Subtotal:</span>
                     <span className="fs-5 text-success fw-bold">
